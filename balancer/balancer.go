@@ -18,9 +18,9 @@ var SumWeight int
 
 func init() {
 	LB = NewLoadBalancer()
-	LB.AddServer(server.NewHttpServer("http://127.0.0.1:9091", 1))
-	LB.AddServer(server.NewHttpServer("http://127.0.0.1:9092", 2))
-	LB.AddServer(server.NewHttpServer("http://127.0.0.1:9093", 3))
+	LB.AddServer(server.NewHttpServer("http://127.0.0.1:90910", 1))
+	LB.AddServer(server.NewHttpServer("http://127.0.0.1:90920", 2))
+	LB.AddServer(server.NewHttpServer("http://127.0.0.1:90930", 3))
 
 	for index, serverInstance := range LB.servers {
 		for i := 0; i < serverInstance.Weight; i++ {
