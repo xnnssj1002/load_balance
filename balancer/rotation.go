@@ -37,40 +37,6 @@ func (lb *LoadBalancer) WeightRotationByIndex() *server.HttpServer {
 	return serverInstance
 }
 
-// WeightRotationByGap 加权轮训算法 - 使用区间 TODO 未完成
-func (lb *LoadBalancer) WeightRotationByGap() *server.HttpServer {
-	serverInstance := lb.servers[0]
-	sum := 0
-	sumList := make([]int, len(lb.servers)) // 1:2:3 [0, 1), [1, 3), [3, 6)
-	for i := 0; i < len(lb.servers); i++ {
-		sum += lb.servers[i].Weight
-		sumList[i] = sum
-	}
-
-	// lb.curIndex 表示已经轮训到的小于sum的值
-	for index, value := range sumList {
-		stop := false
-		for i := lb.curIndex; i < sum; i++ {
-			if lb.curIndex < value {
-				stop = true
-				serverInstance = lb.servers[index]
-			}
-			lb.curIndex++
-			if lb.curIndex >= sum {
-				lb.curIndex = 0
-			}
-			if stop {
-				break
-			}
-		}
-		if stop {
-			break
-		}
-
-	}
-	return serverInstance
-}
-
 // WeightRotationByGapOptimized 加权轮训算法 - 使用区间优化版本
 func (lb *LoadBalancer) WeightRotationByGapOptimized() *server.HttpServer {
 	serverInstance := lb.servers[0]

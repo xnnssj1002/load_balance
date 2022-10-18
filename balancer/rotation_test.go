@@ -25,13 +25,6 @@ func TestLoadBalancer_WeightRotationByIndex(t *testing.T) {
 	}
 }
 
-func TestLoadBalancer_WeightRotationByGap(t *testing.T) {
-	for i := 0; i < 10; i++ {
-		serverInstance := LB.WeightRotationByGap()
-		fmt.Println(serverInstance)
-	}
-}
-
 func TestLoadBalancer_WeightRotationByGapOptimized(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		serverInstance := LB.WeightRotationByGapOptimized()
